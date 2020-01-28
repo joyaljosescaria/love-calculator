@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculate Your Love</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Zhi+Mang+Xing&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            outline: none;
+            font-family: 'Zhi Mang Xing', cursive;
+        }
+
+        body {
+            background: black;
+            background-image: url("https://images.unsplash.com/photo-1487035170094-b76fc43abdf5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=667&q=80");
+            background-size: cover;
+        }
+
+        .container {
+            display: flex;
+            width: 80vw;
+            margin-left: 10vw;
+            margin-right: 10vw;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .head {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            padding-top: 4px;
+            height: 20%;
+            color: thistle;
+        }
+
+        .inp {
+            display: flex;
+            width: 100%;
+            height: 80%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* display: none; */
+        }
+
+        .output {
+            display: flex;
+            width: 100%;
+            height: 80%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            display: none;
+        }
+
+        label {
+            font-size: 2rem;
+            color: #ffd1e1;
+        }
+
+        input {
+            font-size: 2rem;
+            margin: 10px;
+            background-color: transparent;
+            border: none;
+            border-bottom: 2px solid white;
+            color: tomato;
+        }
+
+        input:focus {
+            border-bottom: 2px solid red;
+            transition: 3s;
+        }
+
+        button {
+            margin-top: 1rem;
+            padding: 10px;
+            font-size: 20px;
+            color: azure;
+            background-color: crimson;
+            border: none;
+            border-bottom: 1px solid oldlace;
+            cursor: pointer;
+        }
+
+        button:hover {
+            border: 1px solid cornsilk;
+        }
+
+        .name {
+            color: whitesmoke;
+            font-size: 2.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .per {
+            color: tomato;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .pred {
+            color: whitesmoke;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="head">
+            <h1>Calculate Your Love</h1>
+        </div>
+        <div class="inp">
+            <label for="fname">First Name</label>
+            <input type="text" name="fnameinp" id="fnameinp">
+            <label for="sname">Second Name</label>
+            <input type="text" name="snameinp" id="snameinp">
+            <button type="submit" onclick="getLove()">Calculate Your Love</button>
+        </div>
+        <div class="output">
+            <div class="name">Lorem ipsum dolor sit</div>
+            <div class="per"><span id="perc">67</span>%</div>
+            <div class="pred">Lorem ipsum dolor sit.</div>
+            <button>Another Love</button>
+        </div>
+    </div>
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        function getLove() {
+            var fname = document.getElementById("fnameinp").value;
+            var sname = document.getElementById("snameinp").value;
+            var added = fname.concat("loves");
+            var added = added.concat(sname);
+            var added = added.toLowerCase();
+            var letterArray = [];
+            for (i = 0; i < added.length; i++) {
+                letterArray[i] = added[i];
+            }
+    
+            var countArray = [];
+            do
+            {
+                var count = 0;
+                for(j=0;j<letterArray.length;j++)
+                {
+                    if(letterArray[0]==letterArray[j])
+                    {
+                        count = count+1;
+                    }
+                }
+
+                var d = letterArray[0];
+                countArray.push(count);
+                for( var m = letterArray.length;m--;)
+                {
+                    if(letterArray[m] === d)
+                    {
+                        letterArray.splice(m,1);
+                    }
+                }
+            }
+            while(letterArray.length != 0);
+
+            console.log(countArray);
+            do
+            {
+                var tw = 0;
+                console.log(tw++);
+                var num = Math.trunc(countArray.length / 2);
+                var one = 0;
+                if(countArray.length % 2 != 0)
+                {
+                    one = num + 1;
+                }
+
+                var sumArray = [];
+                for(i= 0 ; i < num ; i++)
+                {
+                    var sum = 0;
+                    sum = countArray[0] + countArray[countArray.length - 1];
+                    countArray.splice(0,1);
+                    countArray.splice(countArray.length - 1,1);
+                    sumArray.push(sum);
+                    if(one != 0)
+                    {
+                        sumArray.push(one);
+                    }
+                }
+                console.log(sumArray);
+                console.log(countArray);
+                var stringnum = sumArray.join('');
+                console.log(stringnum);
+                if(stringnum > 100)
+                {
+                    for(ar=0;ar<stringnum.length;ar++)
+                    {
+                        countArray[ar] = stringnum[ar];
+                        console.log(countArray.length);
+                    }
+                }
+                else 
+                {
+                    break;
+                    console.log("stopped")
+                }
+            }
+            while(countArray.length != 0)
+            
+            
+        }
+    </script>
+</body>
+
+</html>
